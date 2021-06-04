@@ -35,14 +35,11 @@ def list_primes(int : max) -> np.array:
 	while num <= math.ceil(np.sqrt(max)): 
 		multiple = num*2 # the first multiple in question
 		while (multiple <= max): # until the end of the list
-			ind = np.where(primes == multiple) # see if you find the multiple
-			if ind[0].size != 0: # now, if you have found the multiple then remove it
-				primes[ind[0]] = 0
+			primes[multiple - 2] = 0
 			multiple += num
-		ind = np.array([])
-		while num <= max and ind.size == 0:
+		num += 1
+		while num <= max and primes[num-2] == 0:
 			num += 1
-			ind = np.where(primes == num)[0]
 		printProgressBar(num, math.ceil(np.sqrt(max)))
 	return primes[np.nonzero(primes)]
 
